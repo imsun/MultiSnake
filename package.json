@@ -1,0 +1,26 @@
+{
+  "name": "MultiSnake",
+  "description": "Homework for B/S Software Design",
+  "repository" : {
+    "type" : "git",
+    "url" : ""
+  },
+  "dependencies": {
+    "babel-core": "^5.5.8",
+    "babel-runtime": "^5.5.8",
+    "koa": "^0.21.0",
+    "koa-file-server": "^2.3.1",
+    "koa-route": "^2.4.1",
+    "systemjs": "^0.18.1"
+  },
+  "devDependencies": {
+    "gulp": "^3.9.0",
+    "gulp-babel": "^5.1.0",
+    "gulp-sourcemaps": "^1.1.1",
+    "node-libs-browser": "^0.5.2",
+    "webpack": "^1.9.11"
+  },
+  "scripts" : {
+    "start": "npm i && gulp && node app"
+  }
+}
