@@ -31,14 +31,18 @@ export let Food = {
     }
     if (Snake.isSnake(Food.map.blocks[y][x])) genPosition()
 
-    _.addClass(Food.map.blocks[y][x], 'food')
-    Food.current = {x, y}
+    Food.onNewFood({x, y})
     return {x, y}
+  },
+  putFood(position) {
+    _.addClass(Food.map.blocks[position.y][position.x], 'food')
+    Food.current = position
   },
   eat() {
     if (Food.isFood(Food.map.blocks[Food.current.y][Food.current.x])) {
       _.removeClass(Food.map.blocks[Food.current.y][Food.current.x], 'food')
     }
     Food.newFood()
-  }
+  },
+  onNewFood() {}
 }

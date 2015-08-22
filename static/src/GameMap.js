@@ -8,9 +8,9 @@ import {_} from './utils.js'
 export class GameMap {
   constructor(config) {
     Object.assign(this, {
-      id: _.uuid('map'),
-      width: 100,
-      height: 60,
+      id: _.uid('map'),
+      width: 50,
+      height: 30,
       domElement: (() => {
         let e = document.createElement('div')
         e.className = 'game-map'
@@ -27,11 +27,9 @@ export class GameMap {
           .map(() => {
             let e = document.createElement('div')
             e.className = 'game-map-block'
-
             this.domElement.appendChild(e)
             return e
           })
       )
-
   }
 }

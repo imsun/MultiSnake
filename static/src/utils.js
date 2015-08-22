@@ -6,7 +6,7 @@
 let uuid = {}
 
 export let _ = {
-  uuid: (nameSpace = 'uuid') => {
+  uid: (nameSpace = 'uid') => {
     uuid[nameSpace] = uuid[nameSpace] || 0
     return nameSpace + uuid[nameSpace]
   },

@@ -4,13 +4,98 @@
     <meta charset="UTF-8">
     <title>MultiSnake</title>
     <link rel="stylesheet" href="/node_modules/bootstrap/dist/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="/node_modules/flat-ui/css/flat-ui.css"/>
+    <link rel="stylesheet" href="styles/style.css"/>
 </head>
 <body>
-
+    <div class="custom-container">
+        <nav class="navbar navbar-inverse">
+            <div class="navbar-header">
+                <a class="navbar-brand">MultiSnake</a>
+            </div>
+            <div class="collapse navbar-collapse">
+                <ul class="nav navbar-nav navbar-left">
+                    <li><a id="newGameBtn">新建游戏</a></li>
+                    <li><a id="rankBtn" data-toggle="modal" data-target="#rankModal">排行榜</a></li>
+                    <li><a id="ruleBtn" data-toggle="modal" data-target="#ruleModal">游戏规则</a></li>
+                </ul>
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a id="userNameLabel"></a></li>
+                </ul>
+            </div>
+        </nav>
+        <div class="row">
+            <span id="countDownLabel" class="col-md-6"></span>
+            <span id="gameBar" class="col-md-6">
+                <span>蓝方已进入游戏 </span>
+                <a id="startGameBtn" class="btn btn-primary">开始游戏</a>
+            </span>
+        </div>
+        <div id="mapBg" class="map-background"><h1>MultiSnake</h1></div>
+    </div>
+    <div id="loginModal" class="modal fade">
+        <div class="modal-dialog">
+            <div class="login-form">
+                <div class="form-group">
+                    <input id="loginName" type="text" class="form-control login-field" placeholder="输入一个名字">
+                    <label for="loginName" class="login-field-icon fui-user"></label>
+                </div>
+                <a id="loginBtn" class="btn btn-primary btn-lg btn-block">确定</a>
+            </div>
+        </div>
+    </div>
+    <div id="roomModal" class="modal fade">
+        <div class="modal-dialog login-form">
+            <div>请将该链接分享给朋友：</div>
+            <a id="roomHref" target="_blank"></a>
+            <div>对方点击该链接进入后双方即可开始对战</div>
+            <a class="btn btn-primary btn-lg btn-block" data-toggle="modal" data-target="#roomModal">确定</a>
+        </div>
+    </div>
+    <div id="ruleModal" class="modal fade">
+        <div class="modal-dialog login-form">
+            <ol>
+                <li>红方与蓝方各控制一条贪吃蛇在地图上进行运动；</li>
+                <li>地图上随机出现食物（黄色方块）。吃下食物将使蛇身增长；</li>
+                <li>当蛇头碰到墙壁或蛇身时，贪吃蛇死亡，相应的玩家输掉游戏；</li>
+                <li>若在规定时间内双方均未死亡，则取蛇身最长的一方作为胜利者</li>
+            </ol>
+            <a class="btn btn-primary btn-lg btn-block" data-toggle="modal" data-target="#ruleModal">确定</a>
+        </div>
+    </div>
+    <div id="rankModal" class="modal fade">
+        <div class="modal-dialog login-form">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>排名</th>
+                        <th>姓名</th>
+                        <th>总分</th>
+                        <th>胜</th>
+                        <th>负</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr><th>1</th><th>imsun</th><th>4</th><th>4</th><th>0</th></tr>
+                    <tr><th>2</th><th>test</th><th>0</th><th>1</th><th>1</th></tr>
+                    <tr><th>3</th><th>asdf</th><th>-4</th><th>0</th><th>4</th></tr>
+                </tbody>
+            </table>
+            <a class="btn btn-primary btn-lg btn-block" data-toggle="modal" data-target="#rankModal">确定</a>
+            <span class="login-link">排行规则：每赢一局计一分，输一局减一分，按总分进行排名。</span>
+        </div>
+    </div>
+    <div id="noticeModal" class="modal fade">
+        <div class="modal-dialog login-form">
+            <h1 id="noticeMsg" class="text-center"></h1>
+            <a class="btn btn-primary btn-lg btn-block" data-toggle="modal" data-target="#noticeModal">确定</a>
+        </div>
+    </div>
     <script src="/node_modules/jquery/dist/jquery.min.js"></script>
     <script src="/node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
     <script src="/node_modules/babel-core/browser-polyfill.js"></script>
     <script src="/node_modules/systemjs/dist/system.js"></script>
+    <script src="/socket.io/socket.io.js"></script>
     <script>
         System.config({
             baseURL: './dist'
